@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import {getAuth , signInWithEmailAndPassword , createUserWithEmailAndPassword ,onAuthStateChanged} from "firebase/auth"
+import {getFirestore ,collection,getDocs, addDoc,doc, updateDoc, arrayUnion, arrayRemove, query, where,getDoc } from "firebase/firestore"
+import {getDatabase} from "firebase/database"
+import {getStorage ,ref ,getDownloadURL,uploadBytesResumable } from 'firebase/storage'
+import { getFunctions} from "firebase/functions"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,6 +21,26 @@ const firebaseConfig = {
   measurementId: "G-MJFGGV74X2"
 };
 
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const auth = getAuth(app)
+const db = getFirestore(app);
+const storage = getStorage(app, "gs://file-manager-b8771.appspot.com");
+
+export {
+  auth,
+  db,
+  storage,
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword,
+onAuthStateChanged,
+collection,
+ addDoc,
+ ref,
+ getDownloadURL,
+ uploadBytesResumable,
+ doc, updateDoc, arrayUnion, arrayRemove, query, where,getDocs,getDoc
+}

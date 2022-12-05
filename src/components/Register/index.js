@@ -1,6 +1,7 @@
 import React, {  useState } from "react";
 import "./style.css";
 import axios from "axios";
+import { auth , createUserWithEmailAndPassword , collection, addDoc,db} from "../../firebaseConfig";
 
 
 
@@ -22,10 +23,34 @@ const Register = () => {
 
 
 
-  const addNewUser = async (e) => {
-      e.preventDefault();
-    
+  const handleRegister = async (e) => {
+    e.preventDefault(); 
+    createUserWithEmailAndPassword(auth , email ,password)
+    .then(result =>{ 
+      console.log(result)
+      try {
+      const  docRef = addDoc (collection (db , "users"),{
+        firstName,
+        lastName,
+        age,
+        country,
+        email,
+        uid: result.user.uid,
+        files : []
+      }) 
+     
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
+    
+    
+    
+    })
+      
+    .catch (error =>{
+     
+      console.log(error)})
+  }
 
     return (
       <>
@@ -33,7 +58,7 @@ const Register = () => {
           { (
             <>
               <p className="Title">Register:</p>
-              <form onSubmit={addNewUser}>
+              <form onSubmit={handleRegister}>
                 <br />
                 <input
                   type="text"

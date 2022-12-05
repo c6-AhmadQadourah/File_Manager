@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-
+import { auth , signInWithEmailAndPassword , onAuthStateChanged} from "../../firebaseConfig";
 import axios from "axios";
-
+import { AuthErrorCodes } from "@firebase/auth";
+import { setUserId } from "../Redux/reducers/usersAuth";
+import { set } from "firebase/database";
 
 const Login = () => {
-
+const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -18,9 +20,22 @@ const Login = () => {
 
 
   const handleLogin = async (e) => {
-    e.preventDefault(); }
+    e.preventDefault(); 
+    signInWithEmailAndPassword(auth , email ,password)
+    .then(result =>{ 
+      setStatus(false)
+      console.log(result.user)
+dispatch(setUserId(result.user.uid))
 
 
+    
+    })
+      
+    .catch (error =>{
+      setStatus(true)
+      setMessage( error.code== AuthErrorCodes.INVALID_PASSWORD ? "Invalid Password" : "Email Doesn't exist")
+      console.log(error.code )})
+  }
     return (
       <>
         <div className="Form">
