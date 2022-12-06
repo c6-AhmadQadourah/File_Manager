@@ -4,7 +4,7 @@ import { getAnalytics } from "firebase/analytics";
 import {getAuth , signInWithEmailAndPassword , createUserWithEmailAndPassword ,onAuthStateChanged} from "firebase/auth"
 import {getFirestore ,collection,getDocs, addDoc,doc, updateDoc, arrayUnion, arrayRemove, query, where,getDoc ,deleteDoc , } from "firebase/firestore"
 import {getDatabase} from "firebase/database"
-import {getStorage ,ref ,getDownloadURL,uploadBytesResumable } from 'firebase/storage'
+import {getStorage ,ref ,getDownloadURL,uploadBytesResumable,uploadBytes } from 'firebase/storage'
 import { getFunctions} from "firebase/functions"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -42,5 +42,5 @@ collection,
  ref,
  getDownloadURL,
  uploadBytesResumable,
- doc, updateDoc, arrayUnion, arrayRemove, query, where,getDocs,getDoc,deleteDoc
+ doc, updateDoc, arrayUnion, arrayRemove, query, where,getDocs,getDoc,deleteDoc,uploadBytes
 }

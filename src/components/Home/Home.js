@@ -1,6 +1,10 @@
 import React from "react";
 import "./Home.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback  } from "react";
+import {setFiles ,deleteFile} from "../Redux/reducers/usersAuth"
+import Navbar from "../Navbar/Navbar";
+
+
 import {
   storage,
   ref,
@@ -21,9 +25,12 @@ import {
   deleteDoc
 } from "../../firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
-import {setFiles ,deleteFile} from "../Redux/reducers/usersAuth"
-import Navbar from "../Navbar/Navbar";
-import { setPriority } from "firebase/database";
+
+
+
+
+
+
 function Home() {
   const { userId,files } = useSelector((state) => {
     return {
@@ -125,9 +132,18 @@ function Home() {
 
 
   };
+
+
+
+
+
+
+
+
   return (
     <>
   <Navbar/>
+
 
     
     <div>
