@@ -2,7 +2,8 @@ import React, {  useState } from "react";
 import "./style.css";
 import axios from "axios";
 import { auth , createUserWithEmailAndPassword , collection, addDoc,db} from "../../firebaseConfig";
-
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
 
 
 
@@ -20,7 +21,7 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(false);
 
-
+const navigate=useNavigate()
 
 
   const handleRegister = async (e) => {
@@ -43,7 +44,7 @@ const Register = () => {
       console.error("Error adding document: ", e);
     }
     
-    
+    navigate("./login")
     
     })
       
@@ -54,6 +55,7 @@ const Register = () => {
 
     return (
       <>
+      <Navbar/>
         <div className="Form">
           { (
             <>

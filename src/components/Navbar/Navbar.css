@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    background: rgb(154, 98, 98);
+  
+    height: 50px;
+
+}
+.loginDivNav{
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+}
+.homeDivNav{
+    width: 70%;
+}
+.loginDivNav p {
+    cursor: pointer;
+}
+
+.homeDivNav p {
+    cursor: pointer;
+
+}

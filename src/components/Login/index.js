@@ -7,6 +7,7 @@ import axios from "axios";
 import { AuthErrorCodes } from "@firebase/auth";
 import { setUserId } from "../Redux/reducers/usersAuth";
 import { set } from "firebase/database";
+import Navbar from "../Navbar/Navbar";
 
 const Login = () => {
 const dispatch = useDispatch()
@@ -26,7 +27,7 @@ const dispatch = useDispatch()
       setStatus(false)
       console.log(result.user)
 dispatch(setUserId(result.user.uid))
-
+navigate("/")
 
     
     })
@@ -38,6 +39,7 @@ dispatch(setUserId(result.user.uid))
   }
     return (
       <>
+      <Navbar/>
         <div className="Form">
           <p className="Title">Login:</p>
           <form onSubmit={handleLogin}>

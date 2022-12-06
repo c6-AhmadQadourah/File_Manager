@@ -22,6 +22,8 @@ import {
 } from "../../firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import {setFiles ,deleteFile} from "../Redux/reducers/usersAuth"
+import Navbar from "../Navbar/Navbar";
+import { setPriority } from "firebase/database";
 function Home() {
   const { userId,files } = useSelector((state) => {
     return {
@@ -33,6 +35,9 @@ function Home() {
   const dispatch = useDispatch()
 
   const [file, setFile] = useState("");
+
+ 
+  const [new1, setNew1] = useState(false);
 
   const [data, setData] = useState([]);
 
@@ -61,7 +66,7 @@ function Home() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [new1]);
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -100,7 +105,7 @@ function Home() {
               } catch (e) {
                 console.error("Error adding document: ", e);
               }
-
+             setNew1(true)
          console.log(url);
         });
       }
@@ -122,6 +127,9 @@ function Home() {
   };
   return (
     <>
+  <Navbar/>
+
+    
     <div>
       <input type="file" onChange={handleChange} accept="/image/*" />
       <button onClick={handleUpload}>Upload to Firebase</button>
@@ -135,11 +143,13 @@ function Home() {
     {files&&files.map((elem,i)=>{
       
         return (
+          <div className="bigDiv"> 
             <div className="imagesDiv" key={i} >
-                <img  src={elem.url} ></img>
-            <button onClick={()=>{
+                <img className="image"  src={elem.url} ></img>
+            <button className="deleteButton" onClick={()=>{
               handleDelete(elem.url)
             }}> Delete</button>
+            </div>
             </div>
         )
     })}
