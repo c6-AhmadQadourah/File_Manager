@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import {getAuth , signInWithEmailAndPassword , createUserWithEmailAndPassword ,onAuthStateChanged} from "firebase/auth"
-import {getFirestore ,collection,getDocs, addDoc,doc, updateDoc, arrayUnion, arrayRemove, query, where,getDoc } from "firebase/firestore"
+import {getFirestore ,collection,getDocs, addDoc,doc, updateDoc, arrayUnion, arrayRemove, query, where,getDoc ,deleteDoc , } from "firebase/firestore"
 import {getDatabase} from "firebase/database"
 import {getStorage ,ref ,getDownloadURL,uploadBytesResumable } from 'firebase/storage'
 import { getFunctions} from "firebase/functions"
@@ -42,5 +42,5 @@ collection,
  ref,
  getDownloadURL,
  uploadBytesResumable,
- doc, updateDoc, arrayUnion, arrayRemove, query, where,getDocs,getDoc
+ doc, updateDoc, arrayUnion, arrayRemove, query, where,getDocs,getDoc,deleteDoc
 }

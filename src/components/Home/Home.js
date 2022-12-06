@@ -17,14 +17,17 @@ import {
   arrayRemove,
   db,
   getDocs,
-  getDoc
+  getDoc,
+  deleteDoc
 } from "../../firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
-import {setFiles} from "../Redux/reducers/usersAuth"
+import {setFiles ,deleteFile} from "../Redux/reducers/usersAuth"
 function Home() {
   const { userId,files } = useSelector((state) => {
     return {
       userId: state.usersAuth.userId,
+      files: state.usersAuth.files,
+
     };
   });
   const dispatch = useDispatch()
@@ -67,6 +70,7 @@ function Home() {
   const handleUpload = () => {
     if (!file) {
       alert("Please upload an image first!");
+      return
     }
 
     const storageRef = ref(storage, `/files/${file.name}`);
@@ -103,9 +107,19 @@ function Home() {
     );
   };
 
+  
+  const handleDelete = (url) => {
+    const q = query(collection(db, "files"), where("url", "==", url));
+    getDocs(q).then(function(querySnapshot) {
+  querySnapshot.forEach(function(doc) {
+    deleteDoc(doc.ref)
+    dispatch(deleteFile(url))
+
+  });
+});
 
 
- console.log(data)
+  };
   return (
     <>
     <div>
@@ -116,16 +130,21 @@ function Home() {
 
 
 
+    <div className="container"> 
 
-    {data&&data.map((elem,i)=>{
+    {files&&files.map((elem,i)=>{
       
         return (
-            <div key={i}>
+            <div className="imagesDiv" key={i} >
                 <img  src={elem.url} ></img>
-
+            <button onClick={()=>{
+              handleDelete(elem.url)
+            }}> Delete</button>
             </div>
         )
     })}
+    </div>
+
     <div>
 
 

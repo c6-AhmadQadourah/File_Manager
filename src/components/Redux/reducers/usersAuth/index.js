@@ -21,8 +21,14 @@ const usersAuthSlice = createSlice({
     setFiles: (state, action) => {
       state.files = action.payload;
     },
+    deleteFile: (state, action) => {
+      state.files= state.files.filter((elem, index) =>{
+           return elem.url != action.payload;
+         });
+       },
+    
   },
 });
 
-export const { setLogout, setUserId,setFiles } = usersAuthSlice.actions;
+export const { setLogout, setUserId,setFiles, deleteFile } = usersAuthSlice.actions;
 export default usersAuthSlice.reducer;

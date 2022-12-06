@@ -1,0 +1,12 @@
+.imagesDiv{
+
+    display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+}
+.imagesDiv img {
+    width: 300px;
+}
+.container {
+    
+}
