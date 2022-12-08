@@ -28,6 +28,7 @@ const dispatch = useDispatch()
       console.log(result.user)
 dispatch(setUserId(result.user.uid))
 navigate("/")
+  
 
     
     })

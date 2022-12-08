@@ -1,7 +1,9 @@
+
+
 .container{
 
     display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 gap: 20px;
 margin: 10px;
 }
@@ -10,13 +12,28 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
+
 }
 .image {
     width: 300px;
 }
 .container {
-    
+
 }
 .deleteButton{
     width: 100px;
+}
+
+.sideBar{
+    /* background-color: rgba(135, 212, 227, 0.464); */
+    display: flex;
+    flex-direction: column;
+}
+
+.noImages{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
 }

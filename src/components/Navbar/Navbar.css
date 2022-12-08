@@ -2,24 +2,32 @@
     display: flex;
     width: 100vw;
     justify-content: space-around;
-    background: rgb(154, 98, 98);
-  
+    /* background: rgba(118, 194, 210, 0.794);; */
     height: 50px;
+    flex-wrap: wrap;
+align-content: space-around;
+font-weight: bold;
 
 }
 .loginDivNav{
     width: 20%;
     display: flex;
     justify-content: space-around;
+flex-wrap: wrap;
+
 }
 .homeDivNav{
     width: 70%;
 }
 .loginDivNav p {
     cursor: pointer;
+    font-size: large;
+flex-wrap: wrap;
+
 }
 
 .homeDivNav p {
     cursor: pointer;
-
+    font-size: large;
+flex-wrap: wrap;
 }

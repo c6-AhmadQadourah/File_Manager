@@ -3,8 +3,8 @@ import "./Home.css";
 import { useState, useEffect,useCallback  } from "react";
 import {setFiles ,deleteFile} from "../Redux/reducers/usersAuth"
 import Navbar from "../Navbar/Navbar";
-
-
+import Dropzone from "../Dropzone/Dropzone";
+import image from "./image.svg"
 import {
   storage,
   ref,
@@ -26,25 +26,28 @@ import {
 } from "../../firebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useNavigate } from "react-router-dom";
 
 
 
 
 
 function Home() {
-  const { userId,files } = useSelector((state) => {
+  const { userId,files,isLoggedIn } = useSelector((state) => {
     return {
       userId: state.usersAuth.userId,
       files: state.usersAuth.files,
+    isLoggedIn: state.usersAuth.isLoggedIn,
 
     };
   });
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [file, setFile] = useState("");
 
- 
-  const [new1, setNew1] = useState(false);
+  
+  const [refresh, setRefresh] = useState(false);
 
   const [data, setData] = useState([]);
 
@@ -73,7 +76,7 @@ function Home() {
       .catch((error) => {
         console.log(error);
       });
-  }, [new1]);
+  }, [refresh]);
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -112,7 +115,6 @@ function Home() {
               } catch (e) {
                 console.error("Error adding document: ", e);
               }
-             setNew1(true)
          console.log(url);
         });
       }
@@ -142,39 +144,49 @@ function Home() {
 
   return (
     <>
-  <Navbar/>
+  <Navbar setRefresh={setRefresh}/>
 
 
-    
+{/*     
     <div>
       <input type="file" onChange={handleChange} accept="/image/*" />
       <button onClick={handleUpload}>Upload to Firebase</button>
       <p>{percent} "% done"</p>
-    </div>
+    </div> */}
 
 
+<div className="bigContainer"> 
 
+{ files.length==0 && <div className="noImages"> 
+   <img src={image}/>
+  <button onClick={()=>{navigate("/drop")}}>Add new File </button>
+  </div>}
+  
     <div className="container"> 
-
-    {files&&files.map((elem,i)=>{
+ 
+    {userId? files&&files.map((elem,i)=>{
       
+      console.log(elem)
         return (
           <div className="bigDiv"> 
             <div className="imagesDiv" key={i} >
-                <img className="image"  src={elem.url} ></img>
+           { elem.type.includes("image") && <img className="image"  src={elem.url} ></img>}
+                {elem.type.includes("video") && <iframe type="mp4" className="image"  src={elem.url} title={elem.caption}></iframe> }
+                <h1>{elem.caption} </h1>
             <button className="deleteButton" onClick={()=>{
               handleDelete(elem.url)
             }}> Delete</button>
             </div>
             </div>
         )
-    })}
+    }) : navigate("/login")}
     </div>
 
     <div>
 
 
 
+    </div>
     </div>
     </>
   );
